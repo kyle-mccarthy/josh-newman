@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "jsx": "react",
+    "strict": true,
+    "pretty": true,
+    
+    "noImplicitAny": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    
+    "outDir": ".next",
+    "moduleResolution": "node",
+
+    "noUnusedLocals": true,
+
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    "sourceMap": true,
+    "resolveJsonModule": true,
+
+    "lib": [
+      "dom",
+      "es2017"
+    ],
+
+    "baseUrl": ".",
+    "paths": {
+      "@server/*": [
+        "server/*"
+      ],
+      "@src/*": [
+        "pages/*"
+      ],
+      "@static/*": [
+        "static/*"
+      ]
+    },
+
+    "typeRoots": [
+      "node_modules/@types",
+      "pages/types/typings"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

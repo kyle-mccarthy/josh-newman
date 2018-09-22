@@ -1,0 +1,21 @@
+[
+  {
+    "src": "/static/imgs/portfolio/halo.jpg",
+    "cols": 2
+  },
+  {
+    "src": "/static/imgs/portfolio/obj.jpg"
+  },
+  {
+    "src": "/static/imgs/portfolio/ab.jpg"
+  },
+  {
+    "src": "/static/imgs/portfolio/blackedout.jpg"
+  },
+  {
+    "src": "/static/imgs/portfolio/wonderglass.jpg"
+  },
+  {
+    "src": "/static/imgs/portfolio/grommash.jpg"
+  }
+]

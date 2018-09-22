@@ -1,0 +1,27 @@
+{
+  "presets": [
+    "next/babel",
+    "@zeit/next-typescript/babel"
+  ],
+  "plugins": [
+    "babel-plugin-transform-decorators-legacy",
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./pages"
+        ],
+        "alias": {
+          "@src": "./pages",
+          "@server": "./.next/production-server"
+        },
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ]
+  ]
+}
