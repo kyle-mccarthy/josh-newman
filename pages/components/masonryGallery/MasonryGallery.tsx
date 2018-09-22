@@ -1,6 +1,6 @@
 
 import { IPhoto } from '@src/types';
-import { Bind } from 'lodash-decorators';
+import { Bind, Debounce } from 'lodash-decorators';
 import React from 'react';
 import Lightbox from 'react-images';
 import { StyledMasonryGallery, Tile } from './MasonryGallery.styled';
@@ -12,10 +12,37 @@ interface IMasonryGalleryProps {
 interface IMasonryGalleryState {
   lightboxOpen: boolean;
   slide?: number;
+  columns: number;
 }
 
 class MasonryGallery extends React.Component<IMasonryGalleryProps, IMasonryGalleryState> {
-  public readonly state: IMasonryGalleryState = { lightboxOpen: false };
+  public readonly state: IMasonryGalleryState = { lightboxOpen: false, columns: 3 };
+  public resizeListener: any;
+
+  public componentDidMount() {
+    if (this.state.columns !== this.getColumnsFromWidth()) {
+      this.setState({
+        columns: this.getColumnsFromWidth(),
+      });
+    }
+
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  public componentWillReceiveProps() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  @Debounce(250)
+  @Bind()
+  public handleResize() {
+    const columns = this.getColumnsFromWidth();
+    if (columns !== this.state.columns) {
+      this.setState({
+        columns,
+      });
+    }
+  }
 
   @Bind()
   public handleTileClicked(tileIndex: number) {
@@ -48,10 +75,20 @@ class MasonryGallery extends React.Component<IMasonryGalleryProps, IMasonryGalle
     }));
   }
 
+  @Bind()
+  public getColumnsFromWidth() {
+    if (typeof window === 'undefined' || window.innerWidth > 800) {
+      return 3;
+    } else if (window.innerWidth > 600) {
+      return 2;
+    }
+    return 1;
+  }
+
   public render() {
     return (
       <React.Fragment>
-        <StyledMasonryGallery cols={3} cellHeight={300} spacing={5}>
+        <StyledMasonryGallery cols={this.state.columns} cellHeight={300} spacing={5}>
           {this.props.photos.map((img: IPhoto, i: number) => (
             <Tile
               key={i}

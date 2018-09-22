@@ -14,4 +14,9 @@ export default class SiteController {
     await render('Portfolio');
   }
 
+  @Get('/about')
+  public async about(@Render() render: Renderer) {
+    await render('About');
+  }
+
 }
