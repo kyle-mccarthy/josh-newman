@@ -45,5 +45,5 @@ app.prepare().then(async () => {
   context.nextHandler = handler.bind(app);
   server.context = context;
 
-  server.listen(3000);
+  server.listen(process.env.PORT || 3000);
 });
