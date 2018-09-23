@@ -7,7 +7,7 @@ module.exports = {
     // First application
     {
       name      : 'josh',
-      script    : './.next/production-server/index.js',
+      script    : 'current/.next/production-server/index.js',
       env_production: {
         PORT: 3200,
         NODE_ENV: 'production'
