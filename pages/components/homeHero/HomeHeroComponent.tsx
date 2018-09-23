@@ -1,4 +1,4 @@
-import { Bind } from 'lodash-decorators';
+import { Bind, Debounce } from 'lodash-decorators';
 import React from 'react';
 import { css } from 'react-emotion';
 import { Arc, FastLayer, Stage } from 'react-konva';
@@ -27,8 +27,7 @@ interface IState {
 
 class HomeHeroComponent extends React.Component<any, IState> {
   public readonly state: IState = {
-    width: window.innerWidth,
-    height: window.innerHeight - 47,
+    ...this.getWindowSize(),
     orbs: [],
   };
   public ref!: Stage;
@@ -45,12 +44,34 @@ class HomeHeroComponent extends React.Component<any, IState> {
         ...this.initializeArc(),
       })),
     });
+
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  public componentWillReceiveProps() {
+    window.removeEventListener('resize', this.handleResize);
   }
 
   public componentWillUnmount() {
     if (this.state.animationFrame$) {
       this.state.animationFrame$.unsubscribe();
     }
+  }
+
+  @Debounce(250)
+  @Bind()
+  public handleResize() {
+    this.setState({
+      ...this.getWindowSize(),
+    });
+  }
+
+  @Bind()
+  public getWindowSize() {
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight - 47,
+    };
   }
 
   @Bind()

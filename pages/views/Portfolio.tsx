@@ -8,7 +8,7 @@ const StyledPortfolio = styled('div')({
   flexGrow: 1,
 });
 
-const MasonryGallery = dynamic(import('@src/components/masonryGallery/MasonryGallery'), { ssr: false});
+const MasonryGallery = dynamic(import('@src/components/masonryGallery/MasonryGallery'), { ssr: false });
 
 const Portfolio: React.SFC = () => {
   return (
